@@ -45,7 +45,7 @@ myapp.change_view(myview)
 myapp.start()
 ```
 
-Now we'll want to create some widgets and add them to our view. Like the View class, the SimpleWidget class is a wrapper for the tk widget classes. Unlike views, if you want to change any tkinter properites of these widgets, you can pass those arguments <ins>directly</ins>. SimpleWidgets are children of their tkinter
+Now we'll want to create some widgets and add them to our view. Like the View class, the SimpleWidget class is a wrapper for the tk widget classes. Unlike views, if you want to change any tkinter properites of these widgets, you can pass those arguments <ins>directly</ins>. SimpleWidgets are children of their tkinter counterparts.
 
 Let's create a label and a button. SimpleWidgets take a <ins>view</ins> as an argument, not a frame.
 
@@ -119,7 +119,7 @@ mygridview.add_widgets([
 mygridview.build_grid()
 ```
 
-Unlike SimpleView, you must explicitly build your grid. This is because you may want to add more widgets before the geometry manager figures out where to put them.
+Unlike SimpleView, you must first add your widgets to your view, *then* build the grid.
 Finally, let's modify our first SimpleView to bring us to our new GridView:
 
 ```
