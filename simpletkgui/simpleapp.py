@@ -64,6 +64,7 @@ class SimpleWindow(tk.Toplevel, App):
         if style == None: style=parent.style
 
         self.parent = parent
+        self.appname = parent.appname
         self.style = style
 
         super().__init__(parent)
@@ -84,7 +85,5 @@ class SimpleWindow(tk.Toplevel, App):
 
         elif parent.icon != None: self.tk.call('wm', 'iconphoto', self._w, parent.icon)
 
-if __name__ == '__main__':
-    app = App('title')
-    window = SimpleWindow(app)
-    app.start()
+        self.active_view = None
+        self.active_windows = []
