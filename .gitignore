@@ -1,3 +1,6 @@
 __pycache__*
 *-project
 *-workspace
+build*
+dist*
+*.egg-info*
