@@ -77,39 +77,3 @@ class SimpleWindow(tk.Toplevel, App):
             self.geometry(f'{minsize[0]}x{minsize[1]}')
 
         if parent.icon != None: self.tk.call('wm', 'iconphoto', self._w, parent.icon)
-
-if __name__ == '__main__':
-    import simpleviews
-    import simplewidgets
-
-    myapp = App('My First App', start_hidden=True)
-    mynav = simpleviews.Nav(myapp, title='My First SimpleGUI View')
-    myview = simpleviews.SimpleView(myapp, nav=mynav)
-
-    mylabel = simplewidgets.SimpleLabel(myview, 'This is a SimpleLabel')
-    mybutton = simplewidgets.SimpleButton(myview, 'Go To GridView', lambda: myapp.change_view(mygridview))
-    myview.build_grid({
-        'row1': mylabel,
-        'row2': mybutton,
-    })
-
-    mygridnav = simpleviews.Nav(myapp, title='My First GridView', return_view_text='Main Menu', return_view=myview)
-    mygridview = simpleviews.GridView(myapp, mygridnav)
-
-    mygridlabel = simplewidgets.SimpleLabel(mygridview, 'Here are all of my buttons:')
-    button1 = simplewidgets.SimpleButton(mygridview, 'Button 1', lambda: print('Button 1 has been pushed!'))
-    button2 = simplewidgets.SimpleButton(mygridview, 'Button 2', lambda: print('Button 2 has been pushed!'))
-    button3 = simplewidgets.SimpleButton(mygridview, 'Button 3', lambda: print('Button 3 has been pushed!'))
-    mycheckbutton = simplewidgets.SimpleCheckbutton(mygridview, 'I approve of these buttons', lambda: print(f'User approval status: {mycheckbutton.read()}'))
-
-    mygridview.add_widgets([
-        ((0, 0), (3, 1), mygridlabel),
-        ((0, 1), (1, 1), button1),
-        ((1, 1), (1, 1), button2),
-        ((2, 1), (1, 1), button3),
-        ((0, 2), (3, 3), mycheckbutton)
-    ])
-    mygridview.build_grid()
-
-    myapp.change_view(myview)
-    myapp.start()

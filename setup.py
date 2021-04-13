@@ -10,7 +10,7 @@ setup(
     description='A collection of tools wrapped around tkinter to make good-looking GUIs quickly',
     long_description=README,
     long_description_content_type='text/markdown',
-    url='https://github.com/michael-genson/simplegui',
+    url='https://github.com/michael-genson/simpletkgui',
     author='Michael Genson',
     author_email='genson.michael@gmail.com',
     license='MIT',
