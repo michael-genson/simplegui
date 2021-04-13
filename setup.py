@@ -14,6 +14,6 @@ setup(
     author='Michael Genson',
     author_email='genson.michael@gmail.com',
     license='MIT',
-    packages=['simplegui'],
+    packages=['simpletkgui'],
     zip_safe=False
     )

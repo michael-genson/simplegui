@@ -8,7 +8,9 @@ SimpleTkGUI is a wrapper for the native python module tkinter. It aims to simpli
 SimpleTkGUI is a pet project of mine that has evolved from spaghetti UI code I never want to look at again. Hopefully you find it as a way to spend less time on the presentation, and more time on the functionality.
 
 ### Installation
-Currently the only way to use SimpleTkGUI is to get it from git.
+```
+pip install simpletkgui
+```
 
 ### Usage
 ```
