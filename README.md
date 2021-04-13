@@ -1,21 +1,21 @@
-# SimpleGUI
+# SimpleTkGUI
 
-### What is SimpleGUI?
+### What is SimpleTkGUI?
 For one reason or another, you've decided your scripts need a GUI. Maybe it's a small project for you and your friends, or maybe you're distributing your code to users who don't know how to open command line. Whatever the reason, you want to wrap your code in an interface for non-technical use (or maybe you just like GUIs). If you're like me, you want to write your code, then deploy it as easily as possible, while also being user-friendly.
 
-SimpleGUI is a wrapper for the native python module tkinter. It aims to simplify many of the decisions and complexities in building a tkinter UI, making broad assumptions that will fit 80% of use-cases, while allowing for proper customization as needed.
+SimpleTkGUI is a wrapper for the native python module tkinter. It aims to simplify many of the decisions and complexities in building a tkinter UI, making broad assumptions that will fit 80% of use-cases, while allowing for proper customization as needed.
 
-SimpleGUI is a pet project of mine that has evolved from spaghetti UI code I never want to look at again. Hopefully you find it as a way to spend less time on the presentation, and more time on the functionality.
+SimpleTkGUI is a pet project of mine that has evolved from spaghetti UI code I never want to look at again. Hopefully you find it as a way to spend less time on the presentation, and more time on the functionality.
 
 ### Installation
-Currently the only way to use SimpleGUI is to get it from git.
+Currently the only way to use SimpleTkGUI is to get it from git.
 
 ### Usage
 ```
-from simplegui import *
+from simpletkgui import *
 ```
 
-The core functionality of SimpleGUI lies mostly in the simpleviews and simplewidgets modules. The remaining modules are mainly just helper functions and objects.
+The core functionality of SimpleTkGUI lies mostly in the simpleviews and simplewidgets modules. The remaining modules are mainly just helper functions and objects.
 Start with a SimpleApp object and give it a name. You may also want to start it hidden while you get everything else ready.
 
 ```
@@ -30,7 +30,7 @@ For this example, we will create a nav with a title.
 Note that navs are optional. You don't need a nav to create a view.
 
 ```
-mynav = simpleviews.Nav(myapp, title='My First SimpleGUI View')
+mynav = simpleviews.Nav(myapp, title='My First SimpleTkGUI View')
 myview = simpleviews.SimpleView(myapp, nav=mynav)
 ```
 
@@ -65,10 +65,10 @@ If you want to provide more than one widget per row, pass it in a list and they 
 Here's our code so far:
 
 ```
-from simplegui import *
+from simpletkgui import *
 
 myapp = App('My First App', start_hidden=True)
-mynav = simpleviews.Nav(myapp, title='My First SimpleGUI View')
+mynav = simpleviews.Nav(myapp, title='My First SimpleTkGUI View')
 myview = simpleviews.SimpleView(myapp, nav=mynav)
 
 mylabel = simplewidgets.SimpleLabel(myview, 'This is a SimpleLabel')
@@ -127,10 +127,10 @@ mybutton = simplewidgets.SimpleButton(myview, 'Go To GridView', lambda: myapp.ch
 Here is the full code:
 
 ```
-from simplegui import *
+from simpletkgui import *
 
 myapp = App('My First App', start_hidden=True)
-mynav = simpleviews.Nav(myapp, title='My First SimpleGUI View')
+mynav = simpleviews.Nav(myapp, title='My First SimpleTkGUI View')
 myview = simpleviews.SimpleView(myapp, nav=mynav)
 
 mylabel = simplewidgets.SimpleLabel(myview, 'This is a SimpleLabel')
@@ -162,9 +162,9 @@ myapp.change_view(myview)
 myapp.start()
 ```
 
-And just like that, you've created your first app using SimpleViews and SimpleWidgets! Hopefully you can see the simplicity of SimpleGUI, and how it can save you a lot of time perfecting your layouts, while giving you enough flexibility to fit your needs.
+And just like that, you've created your first app using SimpleViews and SimpleWidgets! Hopefully you can see the simplicity of SimpleTkGUI, and how it can save you a lot of time perfecting your layouts, while giving you enough flexibility to fit your needs.
 
-And of course, if SimpleGUI ever becomes too limiting, you can always fall back to writing in tkinter directly.
+And of course, if SimpleTkGUI ever becomes too limiting, you can always fall back to writing in tkinter directly.
 
 ## Further Usage and Reading
 Now that you know the basics, check out the source code to understand the customizations and input formats for each SimpleWidget. The general format is to provide a list of inputs, or a dictionary of label: value pairs.
