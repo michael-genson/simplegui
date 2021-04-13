@@ -1,6 +1,5 @@
 # !/usr/bin/env python
 __author__ = 'Michael Genson'
-__version__ = '0.0.0'
 
 from simpletkgui import simpleconfig
 from simpletkgui import simpleicons
@@ -23,7 +22,7 @@ class App(tk.Tk):
 
         self.appname = appname
         self.style = simplestyles.Style(simplestyles.Font(**font), simplestyles.ColorPalette(**color), padding)
-        self.title(f'{appname} - version {__version__}')
+        self.title(f'{appname}')
         self.configure(**self.style.frame)
 
         if resize: self.minsize(minsize[0], minsize[1])
