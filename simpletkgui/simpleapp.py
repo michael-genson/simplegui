@@ -2,10 +2,9 @@
 __author__ = 'Michael Genson'
 __version__ = '0.0.0'
 
-from simplewidgets import *
-import simpleconfig
-import simpleicons
-import simplestyles
+from simpletkgui import simpleconfig
+from simpletkgui import simpleicons
+from simpletkgui import simplestyles
 
 import tkinter as tk
 

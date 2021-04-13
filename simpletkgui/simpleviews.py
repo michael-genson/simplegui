@@ -1,4 +1,4 @@
-import simplewidgets
+from simpletkgui import simplewidgets
 import os
 import tkinter as tk
 import re
