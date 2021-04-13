@@ -250,7 +250,7 @@ class SimpleButton(tk.Button, SimpleWidget):
         if font == None: font=view.style.font.body
         self.clickable = True
 
-        super().__init__(view.frame, text=text, command=command, font=view.style.font.h3, **view.style.button)
+        super().__init__(view.frame, text=text, command=command, font=font, **view.style.button)
         SimpleWidget.__init__(self, view)
 
 
@@ -332,7 +332,7 @@ class SimpleCheckbutton(tk.Checkbutton, SimpleWidget):
         self.variable = tk.StringVar()
         self.variable.set(offvalue)
 
-        super().__init__(view.frame, text=text, command=command, variable=self.variable, onvalue=onvalue, offvalue=offvalue, font=view.style.font.h3, **view.style.checkbutton)
+        super().__init__(view.frame, text=text, command=command, variable=self.variable, onvalue=onvalue, offvalue=offvalue, font=font, **view.style.checkbutton)
         SimpleWidget.__init__(self, view)
 
     def change_text(self, text):
