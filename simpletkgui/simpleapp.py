@@ -56,22 +56,35 @@ class App(tk.Tk):
 
 
 class SimpleWindow(tk.Toplevel, App):
-    def __init__(self, parent, windowname=None, style=None, color={}, padding=(8, 12), resize=True, minsize=(200, 100), icon_data=simpleicons.generic(), start_hidden=False):
+    def __init__(self, parent, windowname=None, style=None, resize=True, minsize=(200, 100), icon_data=None, start_hidden=False):
         if type(minsize) != tuple:
             raise TypeError(f'Minimum size must be of type {tuple}, not {type(minsize)}')
 
         if windowname == None: windowname=parent.appname
         if style == None: style=parent.style
 
-        super().__init__()
+        self.parent = parent
+        self.style = style
+
+        super().__init__(parent)
         if start_hidden: self.hide()
 
         self.title(windowname)
-        self.configure(**parent.style.frame)
+        self.configure(**style.frame)
 
         if resize: self.minsize(minsize[0], minsize[1])
         else:
             self.resizable(width=False, height=False)
             self.geometry(f'{minsize[0]}x{minsize[1]}')
 
-        if parent.icon != None: self.tk.call('wm', 'iconphoto', self._w, parent.icon)
+        self.icon = None
+        if icon_data != None:
+            self.icon = tk.PhotoImage(data=icon_data)
+            self.tk.call('wm', 'iconphoto', self._w, self.icon)
+
+        elif parent.icon != None: self.tk.call('wm', 'iconphoto', self._w, parent.icon)
+
+if __name__ == '__main__':
+    app = App('title')
+    window = SimpleWindow(app)
+    app.start()
