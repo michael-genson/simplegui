@@ -24,6 +24,9 @@ class SimpleConfig:
     def __getitem__(self, index):
         return self.cfg.get(index, None)
 
+    def __setitem__(self, key, value):
+        self.cfg[key] = value
+
     def save(self):
         with open(self.filepath, 'w+') as file: json.dump(self.cfg, file, sort_keys=True, indent=4)
 
