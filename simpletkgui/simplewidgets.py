@@ -456,8 +456,51 @@ class SimpleListbox(tk.Listbox, SimpleWidget):
         
         return selected_values
 
+    def read_options(self):
+        return self.choices
+
     def clear(self):
         self.selection_clear(0, 'end')
+
+
+class SimpleDragDropListbox(SimpleListbox, SimpleWidget):
+    '''
+    adds drag-and-drop functionality to SimpleListBox
+    Modified from:
+        https://stackoverflow.com/questions/14459993/tkinter-listbox-drag-and-drop-with-python
+    '''
+    def __init__(self, view, choices, font=None):
+        SimpleListbox.__init__(self, view, choices, allow_multiple=False, font=font)
+        SimpleWidget.__init__(self, view)
+        self.bind('<Button-1>', self.setCurrent)
+        self.bind('<B1-Motion>', self.shiftSelection)
+        self.curIndex = None
+
+    def setCurrent(self, event):
+        self.curIndex = self.nearest(event.y)
+
+    def shiftSelection(self, event):
+        index = self.nearest(event.y)
+        if index < self.curIndex:
+            list_item = self.get(index)
+            
+            self.delete(index)
+            del self.choices[index]
+
+            self.insert(index+1, list_item)
+            self.choices.insert(index+1, list_item)
+            
+            self.curIndex = index
+        elif index > self.curIndex:
+            list_item = self.get(index)
+            
+            self.delete(index)
+            del self.choices[index]
+            
+            self.insert(index-1, list_item)
+            self.choices.insert(index-1, list_item)
+            
+            self.curIndex = index
 
 
 class SimpleCombobox(ttk.Combobox, SimpleWidget):
