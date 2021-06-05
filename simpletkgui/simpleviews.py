@@ -125,7 +125,7 @@ class View:
         else: self.root = root
 
         self.nav = nav
-        self.style = root.style
+        self.style = root.style.copy()
 
         if hierarchy == 'primary':
             if padding_type == None: self.padding_type = 'none' # removes padding from main frame

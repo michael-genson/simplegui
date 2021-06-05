@@ -84,3 +84,6 @@ class Style:
 
     def get_custom(self, name):
         return self.custom[name]
+
+    def copy(self):
+        return Style(self.font, self.color, (self.padding['padx'], self.padding['pady']))
