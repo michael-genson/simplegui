@@ -64,7 +64,7 @@ class Style:
         self.entry = {
             'normal': {'bg': self.color.secondary, 'readonlybackground': self.color.accent, 'disabledbackground': self.color.secondary, 'fg': self.color.text, 'disabledforeground': self.color.accent_alt, 'insertbackground': self.color.textcursor},
             'warning': {'bg': 'yellow2', 'fg': 'black', 'insertbackground': 'black'},
-            'error': {'bg': 'firebrick1', 'insertbackground': 'black'}
+            'error': {'bg': 'firebrick1', 'fg': 'black', 'insertbackground': 'black'}
         }
         self.textbox = {
             # textbox does not support disabled styles, so SimpleTextbox fudges it using config commands
