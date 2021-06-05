@@ -218,10 +218,10 @@ class SimpleMenu(tk.Menu, SimpleWidget):
         self.bind_all(keybind, command)
 
 class SimpleLabel(tk.Label, SimpleWidget):
-    def __init__(self, view, text, font=None):
+    def __init__(self, view, text, font=None, **kwargs):
         if font == None: font=view.style.font.h3
         
-        super().__init__(view.frame, text=text, font=font, **view.style.label)
+        super().__init__(view.frame, text=text, font=font, **view.style.label, **kwargs)
         SimpleWidget.__init__(self, view)
 
     def change_text(self, text):
@@ -231,7 +231,7 @@ class SimpleLabel(tk.Label, SimpleWidget):
         return self.cget('text')
 
 class SimpleImage(tk.Label, SimpleWidget):
-    def __init__(self, view, image_file, size=None):
+    def __init__(self, view, image_file, size=None, **kwargs):
         with Image.open(image_file) as image:
             if size != None:
                 if isinstance(size, (int, float)): size = (size, size) # correction for single values
@@ -241,7 +241,7 @@ class SimpleImage(tk.Label, SimpleWidget):
                 image = image.resize(size)
             self.image = ImageTk.PhotoImage(image)
 
-        super().__init__(view.frame, image=self.image, **view.style.label)
+        super().__init__(view.frame, image=self.image, **view.style.label, **kwargs)
         SimpleWidget.__init__(self, view)
 
 
@@ -255,10 +255,10 @@ class SimpleButton(tk.Button, SimpleWidget):
 
 
 class SimpleEntry(tk.Entry, SimpleWidget):
-    def __init__(self, view, font=None, censor=False):
+    def __init__(self, view, font=None, censor=False, **kwargs):
         if font == None: font=view.style.font.body
         
-        super().__init__(view.frame, font=font, **view.style.entry['normal'])
+        super().__init__(view.frame, font=font, **view.style.entry['normal'], **kwargs)
         SimpleWidget.__init__(self, view)
 
         if censor: self.config(show='*')
@@ -282,7 +282,7 @@ class SimpleEntry(tk.Entry, SimpleWidget):
 
 
 class SimpleTextbox(tk.Text, SimpleWidget):
-    def __init__(self, view, size=(5,2), font=None):
+    def __init__(self, view, size=(5,2), font=None, **kwargs):
         if type(size) == int: size = (size, size) # correction for single values
         elif type(size) != tuple or len(size) != 2:
             raise TypeError('size must be a tuple of two integers (charcters, rows)')
@@ -293,7 +293,7 @@ class SimpleTextbox(tk.Text, SimpleWidget):
 
         self.custom_state = 'normal' # used for fudging a readonly state and fixing missing style support
 
-        super().__init__(view.frame, width=width, height=height, font=font, **view.style.textbox['normal'])
+        super().__init__(view.frame, width=width, height=height, font=font, **view.style.textbox['normal'], **kwargs)
         SimpleWidget.__init__(self, view)
 
     def enable(self):
@@ -325,14 +325,14 @@ class SimpleTextbox(tk.Text, SimpleWidget):
 
 
 class SimpleCheckbutton(tk.Checkbutton, SimpleWidget):
-    def __init__(self, view, text, command=None, font=None, onvalue=True, offvalue=False):
+    def __init__(self, view, text, command=None, font=None, onvalue=True, offvalue=False, **kwargs):
         if font == None: font=view.style.font.body
         self.clickable = True
 
         self.variable = tk.StringVar()
         self.variable.set(offvalue)
 
-        super().__init__(view.frame, text=text, command=command, variable=self.variable, onvalue=onvalue, offvalue=offvalue, font=font, **view.style.checkbutton)
+        super().__init__(view.frame, text=text, command=command, variable=self.variable, onvalue=onvalue, offvalue=offvalue, font=font, **view.style.checkbutton, **kwargs)
         SimpleWidget.__init__(self, view)
 
     def change_text(self, text):
@@ -349,7 +349,7 @@ class SimpleRadioMenu(tk.Frame, SimpleWidget):
     use .read() to return the value
     '''
 
-    def __init__(self, view, choices, command=None, font=None):
+    def __init__(self, view, choices, command=None, font=None, **kwargs):
         if type(choices) != list and type(choices) != dict:
             raise TypeError('choices must be a list of strings, or a dictionary of {string: value} pairs')
 
@@ -357,7 +357,7 @@ class SimpleRadioMenu(tk.Frame, SimpleWidget):
         self.variable = tk.StringVar()
         self.clear()
 
-        super().__init__(view.frame, **view.style.frame)
+        super().__init__(view.frame, **view.style.frame, **kwargs)
         SimpleWidget.__init__(self, view)
 
         self.choices = {}
@@ -367,7 +367,7 @@ class SimpleRadioMenu(tk.Frame, SimpleWidget):
             if type(choices) == dict: value = choices[choice]
             else: value = choice
 
-            radiobutton = tk.Radiobutton(self, variable=self.variable, text=choice, command=command, value=value, font=font, cursor=self.cursor_enabled, **view.style.radiobutton)
+            radiobutton = tk.Radiobutton(self, variable=self.variable, text=choice, command=command, value=value, font=font, cursor=self.cursor_enabled, anchor='w', **view.style.radiobutton)
             radiobutton.grid(row=index, column=0, sticky='NSEW')
             self.choices[choice] = radiobutton
             index += 1
@@ -413,14 +413,14 @@ class SimpleListbox(tk.Listbox, SimpleWidget):
     displays the string
     use .read() to return the value
     '''
-    def __init__(self, view, choices, allow_multiple=True, font=None):
+    def __init__(self, view, choices, allow_multiple=True, font=None, **kwargs):
         if font == None: font=view.style.font.body
         self.clickable = True
 
         self.update_choices(choices)
         self.variable = tk.StringVar(value=self.choices)
 
-        super().__init__(view.frame, listvariable=self.variable, font=font, **view.style.listbox)
+        super().__init__(view.frame, listvariable=self.variable, font=font, **view.style.listbox, **kwargs)
         SimpleWidget.__init__(self, view)
 
         if allow_multiple: self.configure(selectmode='multiple')
@@ -469,8 +469,8 @@ class SimpleDragDropListbox(SimpleListbox, SimpleWidget):
     Modified from:
         https://stackoverflow.com/questions/14459993/tkinter-listbox-drag-and-drop-with-python
     '''
-    def __init__(self, view, choices, font=None):
-        SimpleListbox.__init__(self, view, choices, allow_multiple=False, font=font)
+    def __init__(self, view, choices, font=None, **kwargs):
+        SimpleListbox.__init__(self, view, choices, allow_multiple=False, font=font, **kwargs)
         SimpleWidget.__init__(self, view)
         self.bind('<Button-1>', self.setCurrent)
         self.bind('<B1-Motion>', self.shiftSelection)
@@ -509,11 +509,11 @@ class SimpleCombobox(ttk.Combobox, SimpleWidget):
     displays the string
     use .read() to return the value
     '''
-    def __init__(self, view, choices, postcommand=None, font=None):
+    def __init__(self, view, choices, postcommand=None, font=None, **kwargs):
         if font == None: font=view.style.font.body
         self.clickable = True
 
-        super().__init__(view.frame, postcommand=postcommand, font=font)
+        super().__init__(view.frame, postcommand=postcommand, font=font, **kwargs)
         SimpleWidget.__init__(self, view)
 
         self.update_choices(choices)
