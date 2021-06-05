@@ -158,7 +158,7 @@ class View:
 
     def pack_forget(self):
         if self.visible:
-            if  self.nav != None:  self.nav.pack_forget()
+            if self.nav != None:  self.nav.pack_forget()
             self.geometric_frame.pack_forget()
             self.visible = False
 
@@ -330,10 +330,6 @@ class GridView(View):
 
         for x in range(0, number_of_columns):
             self.frame.grid_columnconfigure(x, weight=1, uniform='uniform')
-
-        # delete unused widgets
-        for widget in self.frame.winfo_children():
-            if widget not in widget_list: widget.destroy()
 
 
 class ScrolledFrame(tk.Frame):

@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='simpletkgui',
-    version='1.2.1',
+    version='1.2.2',
     description='A collection of tools wrapped around tkinter to make good-looking GUIs quickly',
     long_description=README,
     long_description_content_type='text/markdown',
