@@ -550,8 +550,8 @@ class SimpleCombobox(ttk.Combobox, SimpleWidget):
         self.set('')
 
     def read(self):
-        if self.choices_dict != None: return self.choices_dict[self.variable.get()]
-        else: return self.variable.get()
+        if self.choices_dict and self.get() in self.choices_dict: return self.choices_dict[self.get()]
+        else: return self.get()
 
 
 class SimpleSeparator(ttk.Separator, SimpleWidget):
