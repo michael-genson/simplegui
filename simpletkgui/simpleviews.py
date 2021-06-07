@@ -292,8 +292,8 @@ class GridView(View):
 
         self.check_location(location)
 
-        row = location[0]
-        column = location[1]
+        column = location[0]
+        row = location[1]
 
         if column in self.cells.setdefault(row, {}):
             del self.cells[row][column]
